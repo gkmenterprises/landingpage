@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GKM Container Solutions</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--navy:#0A1F44;
+--blue:#1c3d7a;
+--accent:#e8a020;
+--green:#1c7c54;
+--light:#f2f4f8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--light);}
+
+/* CONTAINER */
+.container{
+max-width:1100px;
+margin:auto;
+padding:0 15px;
+}
+
+/* HEADER */
+header{
+background:linear-gradient(135deg,var(--navy),var(--blue));
+color:white;text-align:center;padding:20px;
+}
+header h2{font-family:'Barlow Condensed';font-size:26px;}
+header span{color:var(--accent);}
+
+/* HERO */
+.hero{
+position:relative;
+color:white;
+text-align:center;
+padding:60px 20px;
+background:url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d') center/cover no-repeat;
+}
+.hero::before{
+content:"";
+position:absolute;inset:0;
+background:rgba(10,31,68,0.75);
+}
+.hero-content{position:relative;z-index:1;max-width:700px;margin:auto;}
+
+.hero h1{
+font-family:'Barlow Condensed';
+font-size:28px;
+margin-bottom:10px;
+}
+.hero p{margin-bottom:15px;}
+
+.badge{
+display:inline-block;
+background:white;
+color:var(--navy);
+padding:5px 10px;
+margin:3px;
+border-radius:20px;
+font-size:11px;
+}
+
+/* BUTTONS */
+.btn{
+display:inline-block;
+margin:8px;
+padding:14px 20px;
+border-radius:8px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+.call{background:var(--navy);}
+.whatsapp{background:var(--green);}
+
+/* SECTION */
+.section{padding:30px 0;}
+.title{
+text-align:center;
+font-family:'Barlow Condensed';
+font-size:24px;
+margin-bottom:15px;
+}
+
+/* SERVICES GRID */
+.services{
+display:grid;
+grid-template-columns:1fr;
+gap:10px;
+}
+.card{
+background:white;
+padding:12px;
+border-radius:10px;
+text-align:center;
+}
+
+/* FORM + CONTACT */
+.flex{
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.form-box,.contact{
+background:white;
+padding:20px;
+border-radius:12px;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin:6px 0;
+border:1px solid #ddd;
+border-radius:6px;
+}
+button{
+width:100%;
+padding:14px;
+background:var(--navy);
+color:white;
+border:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+/* FOOTER */
+footer{
+background:var(--navy);
+color:white;
+text-align:center;
+padding:15px;
+}
+
+/* RESPONSIVE */
+@media(min-width:768px){
+.services{grid-template-columns:repeat(2,1fr);}
+}
+
+@media(min-width:1024px){
+.services{grid-template-columns:repeat(3,1fr);}
+.flex{flex-direction:row;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>GKM <span>Container</span> Solutions</h2>
+<p>Buy • Sell • Convert</p>
+</header>
+
+<div class="hero">
+<div class="hero-content">
+<h1>Buy, Sell & Convert Containers in Chennai</h1>
+<p>Trusted Container Dealers in Chennai</p>
+
+<div>
+<span class="badge">20ft</span>
+<span class="badge">40ft</span>
+<span class="badge">Office</span>
+<span class="badge">Storage</span>
+</div>
+
+<a href="tel:9444531301" class="btn call">Call Now</a>
+<a href="https://wa.me/919444531301?text=Hi%20GKM%20Container%20Solutions,%20I%20need%20details" class="btn whatsapp">WhatsApp</a>
+
+<p><b>9444531301</b><br>sales@gkmenterprises.in</p>
+</div>
+</div>
+
+<div class="section">
+<div class="container">
+<div class="title">Our Services</div>
+
+<div class="services">
+<div class="card">Container Buying & Selling</div>
+<div class="card">Brokerage</div>
+<div class="card">Office Containers</div>
+<div class="card">Storage Units</div>
+<div class="card">Portable Toilets</div>
+<div class="card">Custom Conversions</div>
+</div>
+
+</div>
+</div>
+
+<div class="section">
+<div class="container flex">
+
+<div style="flex:1;">
+<div class="title">Get Best Price</div>
+
+<div class="form-box">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="tel" id="phone" placeholder="Mobile Number" required>
+<input type="email" id="email" placeholder="Email ID" required>
+
+<select id="req">
+<option value="">Select Requirement</option>
+<option>Buy Container</option>
+<option>Sell Container</option>
+<option>Office Container</option>
+<option>Storage</option>
+<option>Toilet</option>
+</select>
+
+<textarea id="msg" placeholder="Your Requirement"></textarea>
+
+<button onclick="send()">Get Quote Now</button>
+<p id="status"></p>
+</div>
+</div>
+
+<div style="flex:1;">
+<div class="title">Contact</div>
+
+<div class="contact">
+📞 9444531301<br>
+📧 sales@gkmenterprises.in<br>
+📍 Manali New Town, Chennai - 600103
+</div>
+</div>
+
+</div>
+</div>
+
+<footer>
+GKM Container Solutions
+</footer>
+
+<script>
+const URL="YOUR_APPS_SCRIPT_URL";
+
+function send(){
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let email=document.getElementById("email").value;
+let req=document.getElementById("req").value;
+let msg=document.getElementById("msg").value;
+
+if(!name||!phone||!email||!req){
+document.getElementById("status").innerHTML="Please fill all fields";
+return;
+}
+
+fetch(URL,{
+method:"POST",
+mode:"no-cors",
+body:JSON.stringify({name,phone,email,req,msg})
+});
+
+document.getElementById("status").innerHTML="Submitted successfully!";
+}
+</script>
+
+</body>
+</html>
