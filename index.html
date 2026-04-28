@@ -52,7 +52,6 @@ nav.scrolled{background:rgba(14,34,102,0.99);}
 }
 .nav-logo img{
   height:46px;width:auto;
-  /* show on dark nav — logo has white/transparent bg, use mix-blend to invert if needed */
   filter:brightness(0) invert(1);
   object-fit:contain;
 }
@@ -390,6 +389,72 @@ nav.scrolled{background:rgba(14,34,102,0.99);}
 .spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:sp 0.7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg);}}
 
+/* ── BLOG PREVIEW SECTION ─────────────────────────────── */
+.blog-preview{
+  background:var(--bg);
+  padding:86px 5%;
+}
+.blog-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+  margin-top:40px;
+}
+.blog-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:all 0.25s;
+}
+.blog-card:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow);
+}
+.blog-img{
+  height:200px;
+  background:linear-gradient(135deg,#0E2266,#1A3070);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:48px;
+}
+.blog-content{
+  padding:22px;
+}
+.blog-date{
+  font-size:11px;
+  color:var(--or);
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.blog-title{
+  font-family:'Syne',sans-serif;
+  font-size:18px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:10px;
+  line-height:1.4;
+}
+.blog-excerpt{
+  font-size:13px;
+  color:var(--gray);
+  line-height:1.65;
+  margin-bottom:16px;
+}
+.blog-link{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  font-weight:700;
+  color:var(--or);
+  transition:gap 0.2s;
+}
+.blog-link:hover{gap:10px;}
+
 /* ── FOOTER ───────────────────────────── */
 footer{background:var(--navy);padding:52px 5% 24px;}
 .fg{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:22px;}
@@ -416,6 +481,7 @@ footer{background:var(--navy);padding:52px 5% 24px;}
   .steps{grid-template-columns:repeat(2,1fr);gap:28px;}
   .steps::before{display:none;}
   .pg{grid-template-columns:1fr 1fr;}
+  .blog-grid{grid-template-columns:repeat(2,1fr);}
   .fg{grid-template-columns:1fr 1fr;gap:28px;}
   .as-right{grid-template-columns:repeat(2,1fr);}
 }
@@ -433,16 +499,19 @@ footer{background:var(--navy);padding:52px 5% 24px;}
   .as-right{grid-template-columns:repeat(2,1fr);}
   .sec{padding:56px 4%;}
   .form-sec{padding:56px 4%;}
+  .blog-preview{padding:56px 4%;}
   .why-grid{grid-template-columns:1fr;gap:28px;}
   .form-wrap{grid-template-columns:1fr;}
   .fl{padding:26px 22px;}
   .fg{grid-template-columns:1fr 1fr;gap:22px;}
   .frow{grid-template-columns:1fr;}
+  .blog-grid{grid-template-columns:1fr;}
 }
 @media(max-width:560px){
   .sg{grid-template-columns:1fr;}
   .steps{grid-template-columns:1fr;}
   .pg{grid-template-columns:1fr;}
+  .blog-grid{grid-template-columns:1fr;}
   .fg{grid-template-columns:1fr;}
   .hsc-div{display:none;}
 }
@@ -466,6 +535,7 @@ footer{background:var(--navy);padding:52px 5% 24px;}
     <li><a href="#products">Products</a></li>
     <li><a href="#why">Why Us</a></li>
     <li><a href="#enquiry">Get Quote</a></li>
+    <li><a href="#blog">Blog</a></li>
   </ul>
   <div class="nav-right">
     <span class="nav-phone">📞 9444531301</span>
@@ -482,6 +552,7 @@ footer{background:var(--navy);padding:52px 5% 24px;}
   <a href="#products" onclick="toggleMenu()">Products</a>
   <a href="#why" onclick="toggleMenu()">Why Us</a>
   <a href="#enquiry" onclick="toggleMenu()">Get Quote</a>
+  <a href="#blog" onclick="toggleMenu()">Blog</a>
   <div class="mob-btns">
     <a href="tel:9444531301" class="btn-primary" style="flex:1;justify-content:center;border-radius:50px;">📞 Call</a>
     <a href="https://wa.me/919444531301" style="flex:1;justify-content:center;background:rgba(255,255,255,0.1);color:#fff;padding:14px;border-radius:50px;border:1.5px solid rgba(255,255,255,0.2);font-weight:600;font-size:15px;display:flex;align-items:center;gap:6px;">💬 WhatsApp</a>
@@ -493,336 +564,4 @@ footer{background:var(--navy);padding:52px 5% 24px;}
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-loc">📍 Manali New Town, Chennai, Tamil Nadu</div>
-    <h1>Buy, Sell &<br><span class="orange">Convert Containers</span></h1>
-    <div class="hero-tagline">
-      <span class="buy">Buy.</span>
-      <span class="div">|</span>
-      <span class="sell">Sell.</span>
-      <span class="div">|</span>
-      <span class="convert">Convert.</span>
-    </div>
-    <p class="hero-sub">Chennai's go-to container solutions company — 20ft & 40ft ISO containers, office units, portable toilets and custom conversions at the best price.</p>
-    <div class="hero-btns">
-      <a href="#enquiry" class="btn-primary">Get in Touch</a>
-      <a href="#products" class="btn-ghost">View Details</a>
-    </div>
-  </div>
-  <div class="hero-stats-card">
-    <div class="hsc-item"><div class="hsc-icon">🏆</div><div class="hsc-label">Quality</div></div>
-    <div class="hsc-div"></div>
-    <div class="hsc-item"><div class="hsc-icon">♻️</div><div class="hsc-label">Eco Friendly</div></div>
-    <div class="hsc-div"></div>
-    <div class="hsc-item"><div class="hsc-icon">🤝</div><div class="hsc-label">Trusted</div></div>
-    <div class="hsc-div"></div>
-    <div class="hsc-big">
-      <div class="hsc-num">100%</div>
-      <div class="hsc-sub">Committed to You</div>
-    </div>
-  </div>
-</section>
-
-<!-- MARQUEE -->
-<div class="mstrip">
-  <div class="minner">
-    <span>Container Buying</span><span>Container Selling</span>
-    <span>Office Containers</span><span>Storage Units</span>
-    <span>Portable Toilets</span><span>Custom Conversions</span>
-    <span>Site Offices</span><span>Brokerage</span>
-    <span>Pan TN Delivery</span><span>Best Price Guaranteed</span>
-    <span>Container Buying</span><span>Container Selling</span>
-    <span>Office Containers</span><span>Storage Units</span>
-    <span>Portable Toilets</span><span>Custom Conversions</span>
-    <span>Site Offices</span><span>Brokerage</span>
-    <span>Pan TN Delivery</span><span>Best Price Guaranteed</span>
-  </div>
-</div>
-
-<!-- ABOUT STRIP -->
-<div class="about-strip">
-  <div class="as-left">
-    A New Generation<br><span>Container Solutions</span> Company
-    <span class="sub">Based in Chennai, we provide top quality new and used containers with the fastest response time and best pricing across Tamil Nadu.</span>
-  </div>
-  <div class="as-right">
-    <div class="as-stat">
-      <div class="as-num"><span class="or">ISO</span></div>
-      <div class="as-label">Certified Containers</div>
-      <div class="as-bar"></div>
-    </div>
-    <div class="as-stat">
-      <div class="as-num"><span class="or">PAN</span></div>
-      <div class="as-label">TN Delivery Network</div>
-      <div class="as-bar"></div>
-    </div>
-    <div class="as-stat">
-      <div class="as-num"><span class="or">30</span><span style="font-size:16px;color:var(--gray)">min</span></div>
-      <div class="as-label">Response Guarantee</div>
-      <div class="as-bar"></div>
-    </div>
-    <div class="as-stat">
-      <div class="as-num"><span class="or">GST</span></div>
-      <div class="as-label">Registered Business</div>
-      <div class="as-bar"></div>
-    </div>
-  </div>
-</div>
-
-<!-- SERVICES -->
-<section class="sec" id="services">
-  <div class="sh">
-    <div class="lbl">What We Do</div>
-    <h2 class="stitle">Complete Container <span class="hl">Solutions</span></h2>
-    <p class="ssub">From buying and selling to full custom fabrications — your one-stop container partner in Chennai.</p>
-  </div>
-  <div class="sg">
-    <div class="sc"><div class="sc-ico">🚢</div><div class="sc-t">Container Buying</div><p class="sc-d">New and used 20ft & 40ft ISO containers at the most competitive prices in Chennai.</p></div>
-    <div class="sc"><div class="sc-ico">💰</div><div class="sc-t">Container Selling</div><p class="sc-d">Sell your old container at the best buyback rates. Free inspection and fast processing.</p></div>
-    <div class="sc"><div class="sc-ico">🤝</div><div class="sc-t">Brokerage</div><p class="sc-d">We connect buyers and sellers across TN and handle all documentation end to end.</p></div>
-    <div class="sc"><div class="sc-ico">🏢</div><div class="sc-t">Office Containers</div><p class="sc-d">Fully fitted offices with AC, electrical, flooring and interiors — ready to move in.</p></div>
-    <div class="sc"><div class="sc-ico">📦</div><div class="sc-t">Storage Containers</div><p class="sc-d">Secure, weatherproof storage for industry, construction and warehouse needs.</p></div>
-    <div class="sc"><div class="sc-ico">🚽</div><div class="sc-t">Portable Toilets</div><p class="sc-d">Mobile toilet units for construction sites, events and remote project locations.</p></div>
-    <div class="sc"><div class="sc-ico">🔧</div><div class="sc-t">Custom Conversions</div><p class="sc-d">Transform containers into clinics, shops, labs or homes with our fabrication team.</p></div>
-    <div class="sc"><div class="sc-ico">🏗️</div><div class="sc-t">Site Offices</div><p class="sc-d">Prefab site offices for construction projects — deployed anywhere in TN within 48 hrs.</p></div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="sec sec-navy">
-  <div class="sh c">
-    <div class="lbl">Our Process</div>
-    <h2 class="stitle" style="color:#fff">How It <span class="hl">Works</span></h2>
-    <p class="ssub" style="margin:12px auto 0;color:rgba(255,255,255,0.48);">Simple, transparent and fast — get your container in 4 steps.</p>
-  </div>
-  <div class="steps">
-    <div class="step"><div class="snum">01</div><div class="step-t">Tell Us Your Need</div><p class="step-d">Fill the form or call us. Tell us the size, type and delivery location.</p></div>
-    <div class="step"><div class="snum">02</div><div class="step-t">Get Best Quote</div><p class="step-d">We call you within 30 minutes with the best available market price.</p></div>
-    <div class="step"><div class="snum">03</div><div class="step-t">Confirm & Pay</div><p class="step-d">Confirm your order. We handle all paperwork and provide GST invoice.</p></div>
-    <div class="step"><div class="snum">04</div><div class="step-t">Delivery to Site</div><p class="step-d">Container delivered to your location anywhere in Tamil Nadu on schedule.</p></div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="sec sec-gray" id="products">
-  <div class="sh">
-    <div class="lbl">Our Inventory</div>
-    <h2 class="stitle">Container <span class="hl">Types</span></h2>
-    <p class="ssub">We stock a wide range of containers for every application and budget.</p>
-  </div>
-  <div class="pg">
-    <div class="pc">
-      <div class="pc-img" style="background:linear-gradient(135deg,#0E2266,#1A3070);">🚢</div>
-      <div class="pc-body">
-        <div class="pc-badge">Most Popular</div>
-        <div class="pc-t">20ft Standard Container</div>
-        <p class="pc-d">Ideal for storage, site offices and retail. Available new and used. Easy to transport anywhere.</p>
-        <a href="#enquiry" class="pc-link">Get Quote →</a>
-      </div>
-    </div>
-    <div class="pc">
-      <div class="pc-img" style="background:linear-gradient(135deg,#0d2b1a,#1a5c37);">📦</div>
-      <div class="pc-body">
-        <div class="pc-badge">Best Value</div>
-        <div class="pc-t">40ft Standard Container</div>
-        <p class="pc-d">Maximum space for large storage, warehousing and industrial applications.</p>
-        <a href="#enquiry" class="pc-link">Get Quote →</a>
-      </div>
-    </div>
-    <div class="pc">
-      <div class="pc-img" style="background:linear-gradient(135deg,#3a1a00,#8a4500);">🏢</div>
-      <div class="pc-body">
-        <div class="pc-badge">Custom Build</div>
-        <div class="pc-t">Office & Custom Units</div>
-        <p class="pc-d">Fully fitted containers with AC, lighting, flooring and interiors to your exact specification.</p>
-        <a href="#enquiry" class="pc-link">Get Quote →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY US -->
-<section class="sec" id="why">
-  <div class="why-grid">
-    <div>
-      <div class="lbl">Why GKM</div>
-      <h2 class="stitle">Built on <span class="hl">Trust,</span><br>Driven by Value</h2>
-      <p class="ssub" style="margin-bottom:26px;">We may be a new business but our team brings years of hands-on container industry experience. Every client gets our best price, fastest response and full support.</p>
-      <div class="wlist">
-        <div class="wi"><div class="wi-ico">💎</div><div><div class="wi-t">Best Price Guarantee</div><p class="wi-d">We match or beat any genuine quote. Transparent pricing, zero hidden charges.</p></div></div>
-        <div class="wi"><div class="wi-ico">⚡</div><div><div class="wi-t">30-Minute Response</div><p class="wi-d">We call back within 30 minutes of your enquiry — every single time.</p></div></div>
-        <div class="wi"><div class="wi-ico">🚚</div><div><div class="wi-t">Pan TN Delivery</div><p class="wi-d">We deliver to any location across Tamil Nadu with reliable logistics.</p></div></div>
-        <div class="wi"><div class="wi-ico">📋</div><div><div class="wi-t">Full Documentation</div><p class="wi-d">Gate pass, delivery challan and proper GST invoice provided for every order.</p></div></div>
-      </div>
-    </div>
-    <div class="wv">
-      <div class="wv-logo"><img src="logo.jpg" alt="GKM"></div>
-      <div class="wv-t">Talk to Us<br><span>Right Now</span></div>
-      <p class="wv-s">Mon – Sat &nbsp;·&nbsp; 9:00 AM – 7:00 PM</p>
-      <div class="wvc"><div class="wvc-ico">📞</div><div><div class="wvc-lbl">Phone</div><div class="wvc-val"><a href="tel:9444531301">9444531301</a></div></div></div>
-      <div class="wvc"><div class="wvc-ico">📧</div><div><div class="wvc-lbl">Email</div><div class="wvc-val"><a href="mailto:sales@gkmenterprises.in">sales@gkmenterprises.in</a></div></div></div>
-      <div class="wvc"><div class="wvc-ico">📍</div><div><div class="wvc-lbl">Address</div><div class="wvc-val">Manali New Town, Chennai 600103</div></div></div>
-      <a href="tel:9444531301" class="wvb or">📞 Call Now</a>
-      <a href="https://wa.me/919444531301" class="wvb out">💬 WhatsApp Us</a>
-    </div>
-  </div>
-</section>
-
-<!-- FORM -->
-<section class="form-sec" id="enquiry">
-  <div class="sh c">
-    <div class="lbl">Get a Quote</div>
-    <h2 class="stitle">Send Your <span class="hl">Enquiry</span></h2>
-    <p class="ssub">We respond within 30 minutes with the best available price.</p>
-  </div>
-  <div class="form-wrap">
-    <div class="fl">
-      <div>
-        <div class="fl-logo"><img src="logo.jpg" alt="GKM"></div>
-        <div class="fl-t">Get Your<br><span>Free Quote</span></div>
-        <p class="fl-s">Fill the form and we'll call you back within 30 minutes with the best price.</p>
-        <div class="fl-ci">
-          <div class="fl-c"><div class="fl-ico">📞</div><a href="tel:9444531301">9444531301</a></div>
-          <div class="fl-c"><div class="fl-ico">📧</div><a href="mailto:sales@gkmenterprises.in">sales@gkmenterprises.in</a></div>
-          <div class="fl-c"><div class="fl-ico">📍</div><span>Manali New Town, Chennai 600103</span></div>
-        </div>
-      </div>
-      <div class="fl-bot">Mon – Sat &nbsp;·&nbsp; 9 AM to 7 PM<br>GST Invoices &nbsp;·&nbsp; Pan TN Delivery</div>
-    </div>
-    <div class="fr">
-      <div class="fr-t">Enquiry Form</div>
-      <p class="fr-s">Fields marked * are required. We'll call within 30 minutes.</p>
-      <div class="frow">
-        <div class="field"><label>Full Name *</label><input type="text" id="f-name" placeholder="Your full name"></div>
-        <div class="field"><label>Mobile *</label><input type="tel" id="f-phone" placeholder="10-digit number" maxlength="10"></div>
-      </div>
-      <div class="frow">
-        <div class="field"><label>Email</label><input type="email" id="f-email" placeholder="your@email.com"></div>
-        <div class="field"><label>City / Location</label><input type="text" id="f-loc" placeholder="Delivery city"></div>
-      </div>
-      <div class="field">
-        <label>Requirement *</label>
-        <select id="f-req">
-          <option value="">Select requirement</option>
-          <option>Buy Container</option>
-          <option>Sell Container</option>
-          <option>Office Container</option>
-          <option>Storage Container</option>
-          <option>Portable Toilet</option>
-          <option>Custom Conversion</option>
-          <option>Brokerage</option>
-        </select>
-      </div>
-      <div class="field"><label>Message / Details</label><textarea id="f-msg" placeholder="Size, quantity, timeline, budget..."></textarea></div>
-      <button class="sub-btn" id="subBtn" onclick="submitForm()">Send Enquiry →</button>
-      <div class="smsg" id="smsg"></div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="fg">
-    <div class="fb">
-      <div class="fb-logo"><img src="logo.jpg" alt="GKM Container Solutions"></div>
-      <p>Chennai's container solutions partner — buy, sell and convert containers across Tamil Nadu.</p>
-    </div>
-    <div class="fc">
-      <h4>Services</h4>
-      <a href="#services">Container Buying</a>
-      <a href="#services">Container Selling</a>
-      <a href="#services">Office Containers</a>
-      <a href="#services">Custom Conversions</a>
-      <a href="#services">Portable Toilets</a>
-    </div>
-    <div class="fc">
-      <h4>Products</h4>
-      <a href="#products">20ft Containers</a>
-      <a href="#products">40ft Containers</a>
-      <a href="#products">High Cube Units</a>
-      <a href="#products">Custom Office Units</a>
-    </div>
-    <div class="fc">
-      <h4>Contact</h4>
-      <a href="tel:9444531301">📞 9444531301</a>
-      <a href="mailto:sales@gkmenterprises.in">📧 sales@gkmenterprises.in</a>
-      <a href="https://wa.me/919444531301">💬 WhatsApp</a>
-      <p>📍 Manali New Town<br>Chennai – 600103</p>
-    </div>
-  </div>
-  <div class="fbot">
-    <p>© 2026 GKM Container Solutions. All rights reserved.</p>
-    <p>GST Registered &nbsp;·&nbsp; ISO Containers &nbsp;·&nbsp; Pan TN Delivery</p>
-  </div>
-</footer>
-
-<script>
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxokJpEK5gaGPD4-yytxm5VhZIu_WQChYQwP8biznjpWFcjrdleKQcgZjpEoqakAM35/exec";
-window.addEventListener('scroll',()=>{
-  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
-});
-function toggleMenu(){
-  document.getElementById('mobMenu').classList.toggle('open');
-}
-document.addEventListener('click',e=>{
-  const m=document.getElementById('mobMenu');
-  if(m.classList.contains('open')&&!document.querySelector('nav').contains(e.target))
-    m.classList.remove('open');
-});
-async function submitForm(){
-  const name=document.getElementById("f-name").value.trim();
-  const phone=document.getElementById("f-phone").value.trim();
-  const email=document.getElementById("f-email").value.trim();
-  const loc=document.getElementById("f-loc").value.trim();
-  const req=document.getElementById("f-req").value;
-  const msg=document.getElementById("f-msg").value.trim();
-  if(!name) return show("Please enter your full name.","err");
-  if(!phone||phone.length<10) return show("Please enter a valid 10-digit mobile number.","err");
-  if(!req) return show("Please select your requirement.","err");
-  const btn=document.getElementById("subBtn");
-  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Sending...';
-  try{
-    await fetch(APPS_SCRIPT_URL,{method:"POST",mode:"no-cors",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({name,phone,email,location:loc,requirement:req,message:msg,
-        date:new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"}),source:"Website"})});
-    show("✅ Thank you "+name+"! We'll call you within 30 minutes.","ok");
-    ["f-name","f-phone","f-email","f-loc","f-msg"].forEach(id=>document.getElementById(id).value="");
-    document.getElementById("f-req").value="";
-  }catch(e){show("❌ Something went wrong. Please call 9444531301.","err");}
-  btn.disabled=false;btn.innerHTML="Send Enquiry →";
-}
-function show(m,t){
-  const el=document.getElementById("smsg");
-  el.textContent=m;el.className="smsg "+t;el.style.display="block";
-  setTimeout(()=>el.style.display="none",6000);
-}
-
-   const SHEET_ID = "1IKcD4MtNPKaRvGwq9mm452n-9llYIe7gfq5Cx86u8zw";
-const API_KEY = "AIzaSyBfQssX-ee7_t73D1zyLtZQDP-LASySkHk";
-const SHEET_NAME = "Enquires";
-
-async function getSheetData() {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/1IKcD4MtNPKaRvGwq9mm452n-9llYIe7gfq5Cx86u8zw/values/Enquires?key=${AIzaSyBfQssX-ee7_t73D1zyLtZQDP-LASySkHk}`;
-  
-  const response = await fetch(url);
-  const data = await response.json();
-  
-  const rows = data.values;
-  const headers = rows[0]; // First row = headers
-  
-  // Convert to array of objects
-  const result = rows.slice(1).map(row => {
-    let obj = {};
-    headers.forEach((header, i) => {
-      obj[header] = row[i];
-    });
-    return obj;
-  });
-  
-  console.log(result);
-  return result;
-}
-
-getSheetData();
-</script>
-</body>
-</html>
+    <h1>Buy
