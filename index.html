@@ -795,6 +795,35 @@ function show(m,t){
   el.textContent=m;el.className="smsg "+t;el.style.display="block";
   setTimeout(()=>el.style.display="none",6000);
 }
+
+   const SHEET_ID = "1IKcD4MtNPKaRvGwq9mm452n-9llYIe7gfq5Cx86u8zw";
+const API_KEY = "AIzaSyBfQssX-ee7_t73D1zyLtZQDP-LASySkHk";
+const SHEET_NAME = "Enquires";
+
+async function getSheetData() {
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/
+${SHEET_ID}/values/Enquires?key=${AIzaSyBfQssX-ee7_t73D1zyLtZQDP-LASySkHk}`;
+  
+  const response = await fetch(url);
+  const data = await response.json();
+  
+  const rows = data.values;
+  const headers = rows[0]; // First row = headers
+  
+  // Convert to array of objects
+  const result = rows.slice(1).map(row => {
+    let obj = {};
+    headers.forEach((header, i) => {
+      obj[header] = row[i];
+    });
+    return obj;
+  });
+  
+  console.log(result);
+  return result;
+}
+
+getSheetData();
 </script>
 </body>
 </html>
