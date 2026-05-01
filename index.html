@@ -766,7 +766,9 @@ document.addEventListener('click',e=>{
   if(m.classList.contains('open')&&!document.querySelector('nav').contains(e.target))
     m.classList.remove('open');
 });
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbywxxQQyFxQOqZuL66fyCLVXL3ii8JTHjWlb9gbB9eNEfH8I9uc7UZoU3JrWbCAMh9w/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwL45H6_Q2vLrXfTlBKkgnue6ih8NR_NxVNza3aSXCp3TjwkoRSnipmPce6djDH1YfL/exec";
+
+
 async function submitForm(){
   const name=document.getElementById("f-name").value.trim();
   const phone=document.getElementById("f-phone").value.trim();
@@ -784,8 +786,9 @@ async function submitForm(){
   btn.innerHTML='<span class="spin"></span> Sending...';
   
   try{
-    const response = await fetch(APPS_SCRIPT_URL, {
+    await fetch(APPS_SCRIPT_URL, {
       method: "POST",
+      mode: "no-cors",
       headers: {
         "Content-Type": "application/json"
       },
@@ -801,15 +804,10 @@ async function submitForm(){
       })
     });
     
-    const result = await response.json();
-    
-    if(result.success) {
-      show("✅ Thank you "+name+"! We'll call you within 30 minutes.","ok");
-      ["f-name","f-phone","f-email","f-loc","f-msg"].forEach(id=>document.getElementById(id).value="");
-      document.getElementById("f-req").value="";
-    } else {
-      throw new Error(result.error || "Server error");
-    }
+    // With no-cors, we can't read response, so just show success
+    show("✅ Thank you "+name+"! We'll call you within 30 minutes.","ok");
+    ["f-name","f-phone","f-email","f-loc","f-msg"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("f-req").value="";
   } catch(e){
     console.error("Error:", e);
     show("❌ Something went wrong. Please call 9444531301.","err");
