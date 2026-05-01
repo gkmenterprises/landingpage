@@ -755,7 +755,6 @@ footer{background:var(--navy);padding:52px 5% 24px;}
 </footer>
 
 <script>
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNFzX2MIU1iP4cnbGM4kBiNCZYPVrdG7ykhQri_dCe8M4tRAr25WJu5T9r49xV81le/exec";
 window.addEventListener('scroll',()=>{
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
 });
@@ -767,6 +766,7 @@ document.addEventListener('click',e=>{
   if(m.classList.contains('open')&&!document.querySelector('nav').contains(e.target))
     m.classList.remove('open');
 });
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNFzX2MIU1iP4cnbGM4kBiNCZYPVrdG7ykhQri_dCe8M4tRAr25WJu5T9r49xV81le/exec";
 async function submitForm(){
   const name=document.getElementById("f-name").value.trim();
   const phone=document.getElementById("f-phone").value.trim();
@@ -774,20 +774,34 @@ async function submitForm(){
   const loc=document.getElementById("f-loc").value.trim();
   const req=document.getElementById("f-req").value;
   const msg=document.getElementById("f-msg").value.trim();
+  
   if(!name) return show("Please enter your full name.","err");
   if(!phone||phone.length<10) return show("Please enter a valid 10-digit mobile number.","err");
   if(!req) return show("Please select your requirement.","err");
+  
   const btn=document.getElementById("subBtn");
   btn.disabled=true;btn.innerHTML='<span class="spin"></span> Sending...';
+  
   try{
-    await fetch(APPS_SCRIPT_URL,{method:"POST",mode:"no-cors",
+    const response = await fetch(APPS_SCRIPT_URL,{
+      method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({name,phone,email,location:loc,requirement:req,message:msg,
-        date:new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"}),source:"Website"})});
+      body:JSON.stringify({
+        name,phone,email,location:loc,requirement:req,message:msg,
+        date:new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"}),
+        source:"Website"
+      })
+    });
+    
+    if(!response.ok) throw new Error(`HTTP ${response.status}`);
+    
     show("✅ Thank you "+name+"! We'll call you within 30 minutes.","ok");
     ["f-name","f-phone","f-email","f-loc","f-msg"].forEach(id=>document.getElementById(id).value="");
     document.getElementById("f-req").value="";
-  }catch(e){show("❌ Something went wrong. Please call 9444531301.","err");}
+  }catch(e){
+    console.error("Error:", e);
+    show("❌ Something went wrong. Please call 9444531301.","err");
+  }
   btn.disabled=false;btn.innerHTML="Send Enquiry →";
 }
 function show(m,t){
