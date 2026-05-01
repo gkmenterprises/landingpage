@@ -766,7 +766,7 @@ document.addEventListener('click',e=>{
   if(m.classList.contains('open')&&!document.querySelector('nav').contains(e.target))
     m.classList.remove('open');
 });
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyoBtQJIP6thiA9B9NXUjuQ3IVKfkJa3Eilgpj8GeYnyYtQSbrVhsj2AIWJyO4HSD5e/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbywxxQQyFxQOqZuL66fyCLVXL3ii8JTHjWlb9gbB9eNEfH8I9uc7UZoU3JrWbCAMh9w/exec";
 async function submitForm(){
   const name=document.getElementById("f-name").value.trim();
   const phone=document.getElementById("f-phone").value.trim();
@@ -780,29 +780,43 @@ async function submitForm(){
   if(!req) return show("Please select your requirement.","err");
   
   const btn=document.getElementById("subBtn");
-  btn.disabled=true;btn.innerHTML='<span class="spin"></span> Sending...';
+  btn.disabled=true;
+  btn.innerHTML='<span class="spin"></span> Sending...';
   
   try{
-    const response = await fetch(APPS_SCRIPT_URL,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        name,phone,email,location:loc,requirement:req,message:msg,
-        date:new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"}),
-        source:"Website"
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+        email,
+        location: loc,
+        requirement: req,
+        message: msg,
+        date: new Date().toLocaleString("en-IN", {timeZone: "Asia/Kolkata"}),
+        source: "Website"
       })
     });
     
-    if(!response.ok) throw new Error(`HTTP ${response.status}`);
+    const result = await response.json();
     
-    show("✅ Thank you "+name+"! We'll call you within 30 minutes.","ok");
-    ["f-name","f-phone","f-email","f-loc","f-msg"].forEach(id=>document.getElementById(id).value="");
-    document.getElementById("f-req").value="";
-  }catch(e){
+    if(result.success) {
+      show("✅ Thank you "+name+"! We'll call you within 30 minutes.","ok");
+      ["f-name","f-phone","f-email","f-loc","f-msg"].forEach(id=>document.getElementById(id).value="");
+      document.getElementById("f-req").value="";
+    } else {
+      throw new Error(result.error || "Server error");
+    }
+  } catch(e){
     console.error("Error:", e);
     show("❌ Something went wrong. Please call 9444531301.","err");
   }
-  btn.disabled=false;btn.innerHTML="Send Enquiry →";
+  
+  btn.disabled=false;
+  btn.innerHTML="Send Enquiry →";
 }
 function show(m,t){
   const el=document.getElementById("smsg");
